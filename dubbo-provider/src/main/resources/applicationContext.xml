@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="dubbo-probider"/>
+    <dubbo:registry address="zookeeper://124.xxx.xxx.2:2181" timeout="25000"/>
+
+    <bean id="personImpl" class="com.arliya.dubbo.provider.PersonImpl"/>
+    <dubbo:service interface="com.arliya.dubbo.api.Person" ref="personImpl"/>
+
+    <bean id="schoolImpl" class="com.arliya.dubbo.provider.SchoolImpl"/>
+    <dubbo:service interface="com.arliya.dubbo.api.School" ref="schoolImpl"/>
+
+
+<!--    <dubbo:protocol name="dubbo" port="8001"/>-->
+    <dubbo:provider telnet="ls,ps,cd,pwd,trace,count,invoke,select,status,log,help,clear,exit,shutdown"/>
+
+</beans>
